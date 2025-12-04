@@ -2,7 +2,7 @@
 
 ## Study isolates
 There are 101 *C. albicans* MEC isolates analyzed for this project (see
-"Calbicans_sequencing_paths.txt" for list of isolate IDs). All MEC isolates are
+"Calbicans_sequencing_paths.txt" for list of isolate IDs). All isolates are
 single colony subcultures from blood cultures collected from UMMC and affiliated 
 hospitals. These were collected under IRB IDs STUDY00006473 and STUDY00021428.
 
@@ -13,8 +13,7 @@ database.
 
 ## DNA extraction and Sequencing
 DNA extraction was performed with the standard Selmecki lab phenol protocol
-(bead beating setting may have varied) in multiple batches between 2021 and
-2024.
+ in multiple batches between 2021 and 2024.
 Illumina sequencing for all isolates was performed at SeqCenter (formerly MiGS)
 on a NextSeq 2000 (the 400 Mb sequencing package, paired end 151 bp reads).
 Insert sizes range from ~100 bp to > 400bp and median coverage ranges from 27x
@@ -33,15 +32,14 @@ compiled with MultiQC v1.13 (see "scripts/classify_align_qc/basic_qc.sh").
 Isolates with low percentage of aligned reads were investigated by
 classification of fastq files using Centrifuge v1.0.4 (see
 "scripts/classify_align_qc/array_centrifuge_classifier.sh"), removed from this 
-analysis and updated in the study database if found to be a different species 
-(MEC008 removed, MEC005 added).
+analysis and updated in the study database if found to be a different *Candida* species 
+than originally ID'd by the clinical laboratory (MEC008 removed, MEC005 added).
 
 ## Multilocus sequence typing
-"Consensus sequences" of the 7 MLST loci were generated for all 100 MEC isolates
+Consensus sequences of the 7 MLST loci were generated for all 101 isolates
 (see "scripts/mlst/"). The PubMLST database was queried via API to
 assign allele IDs and sequence types and to upload to the study database. New 
-alleles were submitted to PubMLST for assignment of
-an ID.
+alleles were submitted to PubMLST for assignment of an ID.
 
 ## Genome visualization
 A local version of YMAP's genome-wide LOH and CNV plotting was performed  using
@@ -96,6 +94,4 @@ number of singleton isolates. Midpoint rooting of the RAxML bipartition file was
 performed with the R package phangorn v2.11.1. Isolate metadata was added to 
 create a treedata object which was visualized using the R packages ggtree v0.4.6
 and tidytree v3.10.1 (see "scripts/figures/Calbicans_gatk_expanded_data_tree.R").
-
-
 
