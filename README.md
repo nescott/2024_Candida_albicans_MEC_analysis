@@ -71,19 +71,20 @@ Joint genotyping is recommended for variant calling of multiple samples (i.e.,
 not combining VCF files of samples that were called separately). To facilitate 
 variant calling of publicly available sequencing data in addition to our study 
 isolates, we used GATK's HaplotypeCaller workflow (see 
-"scripts/haplotype_caller_scripts/"). Variants were called for all isolates with 
+"scripts/haplotype_caller_scripts/"). 
+Variants were called for all study isolates with 
 GATK v4.1.2. A GenomicsDB object was created and VCF data from all isolates was 
 imported. Joint genotyping and filtering was performed following recommendations
-from GATK. Subsequent isolates were added to the GenomicsDB object and joint
+from GATK. Public isolates were added to the GenomicsDB object and joint
 genotyping/filtering was repeated as needed.
 
 ### Phylogenetic tree construction, cluster determination and visualization
-The filtered VCF file was subset to include only SNP sites with no missing data 
-and converted to PHYLIP format using vcf2phylip v2.8 (see 
-"scripts/phylogeny/vcf2philip.sh"). A maximum-likelihood tree was built using 
-RAxML v8.2.11 with the GTR+GAMMA model of nucleotide substitution and rapid 
-bootstrapping (100x) (see "scripts/phylogeny/phylogeny.sh"). No outgroup was
-specified. To define clusters, we adapted the approach described by 
+The filtered VCF file containing all study and public isolates  was subset to 
+include only SNP sites with no missing data and converted to PHYLIP format using 
+vcf2phylip v2.8 (see "scripts/phylogeny/vcf2philip.sh"). A maximum-likelihood 
+tree was built using RAxML v8.2.11 with the GTR+GAMMA model of nucleotide 
+substitution and rapid bootstrapping (100x) (see "scripts/phylogeny/phylogeny.sh"). 
+No outgroup was specified. To define clusters, we adapted the approach described by 
 Schikora-Tamarit and Gabaldón (2024). We defined cluster nodes as internal nodes
 with bootstrap support >95%, having subtending branch lengths above a minimum 
 threshold, and having no child nodes that also met the definition for cluster 
