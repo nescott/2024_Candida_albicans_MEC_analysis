@@ -1,10 +1,10 @@
 # *Candida albicans* clinical isolate genomic analysis
 
 ## Study isolates
-There are 101 *C. albicans* bloodstream isolates analyzed for this project (see
-"Calbicans_sequencing_paths.txt" for list of isolate IDs). All isolates are
-single colony subcultures from blood cultures collected from UMMC and affiliated 
-hospitals. These were collected under IRB IDs STUDY00006473 and STUDY00021428.
+There are 101 *C. albicans* bloodstream isolates analyzed for this project. All 
+isolates are single colony subcultures from blood cultures collected from UMMC 
+and affiliated hospitals. These were collected under IRB IDs STUDY00006473 and 
+STUDY00021428.
 
 ## Metadata
 Clinical metadata is available for study members in a Box spreadsheet and UMN 

@@ -78,7 +78,6 @@ snp_total <- snp_total %>%
 snp_total <- snp_total %>%
   mutate(outlier = ifelse(sample %in% c("AMS5232", "MEC352"), mec_pt_code, NA))
 
-
 chr_total <- snp_again %>% 
   group_by(sample, index) %>% 
   summarise(chr_snps = sum(snp_count, na.rm = TRUE)) %>% 
@@ -92,36 +91,25 @@ chr_summary <- chr_total %>% group_by(index) %>%
             mean_het = mean(chr_het_percent), median_het = median(chr_het_percent))
 
 ## Correlation tests----
-# overall heterozygosity, growth rate, carrying capacity
+# overall heterozygosity, growth rate, SMG 
 genome_het_gc <- snp_total %>% 
+  filter(is.na(ploidy)) %>% 
   left_join(gc %>% filter(drug=="fluconazole"), by = "primary_id") %>% 
-  select(primary_id, het_percentage, k, r, ploidy) 
-
+  select(primary_id, het_percentage, r) %>% 
+  left_join(mic_info %>% filter(drug=="fluconazole"), by = "primary_id") 
+  
 genome_het_gc_corr <- genome_het_gc %>%
-  #filter(is.na(ploidy)) %>% 
-  correlation()
+  filter(is.na(ploidy)) %>% 
+  correlation(select = c("het_percentage", "r", "mean_smg"))
 
-# overall heterozygosity, SMG
-genome_het_smg <- snp_total %>% 
-  #filter(is.na(ploidy)) %>% 
-  left_join(mic_info %>% filter(drug=="fluconazole"), by = "primary_id") %>% 
-  select(het_percentage, mean_smg) %>% 
-  correlation()
-
-# Per chrom heterozygosity, growth rate
+# Per chrom heterozygosity, growth rate, SMG correlation
 chr_het_gc_corr <- chr_total %>% 
   filter(is.na(ploidy)) %>% 
   left_join(gc %>% filter(drug=="fluconazole"), by = "primary_id") %>% 
-  group_by(index) %>% 
-  select(chr_het_percent, r) %>% 
-  correlation()
-
-# Per chrom heterozygosity, SMG
-chr_het_smg <- chr_total %>% 
-  filter(is.na(ploidy)) %>% 
+  select(primary_id, chr_het_percent, r, index) %>% 
   left_join(mic_info %>% filter(drug=="fluconazole"), by = "primary_id") %>% 
   group_by(index) %>% 
-  select(chr_het_percent, mean_smg) %>% 
+  select(sample, index, chr_het_percent, r, mean_smg) %>% 
   correlation()
 
 ## Plots----
